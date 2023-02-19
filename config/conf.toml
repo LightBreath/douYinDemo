@@ -1,0 +1,18 @@
+# mysql的配置
+[mysql]
+host = "127.0.0.1"
+port = 3306
+database = "douyin"
+username = "root"
+password = "030628"
+charset = "utf8mb4"
+parse_time = true
+loc = "Local"
+
+# 生成的资源的存放位置
+[server]
+host = "127.0.0.1"
+port = 8080
+
+# 存放资源的路径
+[path]
