@@ -10,7 +10,7 @@ parse_time = true
 loc = "Local"
 
 # 生成的资源的存放位置
-[server]
+[ftp]
 host = "127.0.0.1"
 port = 8080
 
