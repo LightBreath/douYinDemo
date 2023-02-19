@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/BurntSushi/toml"
 )
@@ -14,13 +15,13 @@ type Mysql struct {
 	Username  string
 	Password  string
 	Charset   string
-	ParseTime bool `toml: "parse_toml"`
+	ParseTime bool `toml:"parse_toml"`
 	Loc       string
 }
 
 type Ftp struct {
-	host string
-	port int32
+	Ip   string
+	Port int
 }
 
 type Path struct {
@@ -29,22 +30,26 @@ type Path struct {
 var Info Config
 
 type Config struct {
-	mysql Mysql `toml:"mysql"`
-	ftp   Ftp   `toml:"ftp"`
-	path  Path  `toml:"path"`
+	Mysql `toml:"mysql"`
+	Ftp   `toml:"ftp"`
+	Path  `toml:"path"`
 }
 
 func ToString() string {
+	// "root:030628@tcp(127.0.0.1:3306)/douyin?charset=utf8mb4&parseTime=True&loc=Local"
 	str := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=%v&loc=%s",
-		Info.mysql.Username, Info.mysql.Password, Info.mysql.Host, Info.mysql.Port, Info.mysql.Database,
-		Info.mysql.Charset, Info.mysql.ParseTime, Info.mysql.Loc)
+		Info.Mysql.Username, Info.Mysql.Password, Info.Mysql.Host, Info.Mysql.Port, Info.Mysql.Database,
+		Info.Mysql.Charset, Info.Mysql.ParseTime, Info.Mysql.Loc)
 	log.Println(str)
 	return str
 }
 
 func init() {
-	_, err := toml.DecodeFile("/home/malchinee/douYinDemo/config/conf.toml", &Info)
+	_, err := toml.DecodeFile("./config/conf.toml", &Info)
+	fmt.Println(Info)
 	if err != nil {
 		panic(err)
 	}
+	strings.Trim(Info.Mysql.Host, " ")
+	strings.Trim(Info.Ftp.Ip, " ")
 }
