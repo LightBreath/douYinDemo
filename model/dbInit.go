@@ -17,7 +17,7 @@ func InitDB() {
 	}
 
 	// 自动迁移，会自动创建表、缺失的外键、约束等
-	err = db.AutoMigrate(&User{})
+	err = db.AutoMigrate(&User{}, &UserInfo{}, &Video{})
 	if err != nil {
 		panic(err)
 	}
