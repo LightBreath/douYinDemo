@@ -1,9 +1,7 @@
 package main
 
 import (
-
 	"douyinDemo/controller"
-
 
 	"douyinDemo/model"
 
@@ -17,6 +15,6 @@ func InitRouter(r *gin.Engine) {
 
 	apiRouter.POST("/user/register/", controller.UserRegister)
 
-	apiRouter.POST("/user/register/", video.Publish)
+	apiRouter.POST("/publish/action", controller.Publish)
 
 }
