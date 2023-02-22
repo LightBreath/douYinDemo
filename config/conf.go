@@ -25,6 +25,8 @@ type Ftp struct {
 }
 
 type Path struct {
+	FfmpegPath       string `toml:"ffmpeg_path"`
+	StaticSourcePath string `toml:"static_source_path"`
 }
 
 var Info Config

@@ -7,8 +7,11 @@ import (
 	"gorm.io/gorm"
 )
 
+var db *gorm.DB
+
 func InitDB() {
-	db, err := gorm.Open(mysql.Open(config.ToString()), &gorm.Config{
+	var err error
+	db, err = gorm.Open(mysql.Open(config.ToString()), &gorm.Config{
 		PrepareStmt:            true, //缓存预编译命令
 		SkipDefaultTransaction: true, //禁用默认事务操作
 	})
